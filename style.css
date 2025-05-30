@@ -80,12 +80,18 @@ section {
     padding: 60px 0; /* Espaçamento vertical padrão para seções */
 }
 
-/* Cor de fundo alternada para algumas seções para melhor distinção visual */
-#sobre-nos, #nossa-equipe, #depoimentos, #pagina-servicos { /* Adicionado #pagina-servicos */
+/* Cor de fundo para seções específicas */
+#sobre-nos, 
+#nossa-equipe, /* Seção da homepage */
+#depoimentos,
+#pagina-servicos, /* Página de Serviços */
+#pagina-equipe { /* Página da Equipe */
     background-color: var(--cor-secundaria);
 }
 /* Seções com fundo primário (padrão do body) */
-#hero, #nossos-servicos, #galeria-home {
+#hero, 
+#nossos-servicos, /* Seção da homepage */
+#galeria-home {
     background-color: var(--cor-primaria);
 }
 
@@ -313,9 +319,6 @@ header nav ul li a.active::after {
 }
 
 /* === Seção Depoimentos (Homepage) === */
-#depoimentos { /* Container da seção na homepage */
-    /* background-color: var(--cor-secundaria); já definido globalmente */
-}
 .depoimento-slider { /* Container dos depoimentos individuais na homepage */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -340,20 +343,18 @@ header nav ul li a.active::after {
     font-weight: bold;
 }
 
-/* === Estilos da Página de Serviços === */
-.pagina-conteudo { /* Classe genérica para páginas internas */
+/* === Estilos Globais para Páginas Internas === */
+.pagina-conteudo {
     padding-top: 40px;
     padding-bottom: 60px;
 }
-
-.titulo-pagina { /* Título principal de uma página interna */
+.titulo-pagina {
     font-size: 2.5rem;
     color: var(--cor-destaque);
     text-align: center;
     margin-bottom: 1rem;
 }
-
-.subtitulo-pagina { /* Subtítulo de uma página interna */
+.subtitulo-pagina {
     text-align: center;
     font-size: 1.1rem;
     color: var(--cor-texto-secundario);
@@ -363,7 +364,7 @@ header nav ul li a.active::after {
     margin-right: auto;
 }
 
-/* Estilos para Filtros de Serviços (Página de Serviços) */
+/* === Estilos da Página de Serviços === */
 #filtros-servicos {
     margin-bottom: 40px;
     text-align: center;
@@ -386,14 +387,12 @@ header nav ul li a.active::after {
     background-color: var(--cor-destaque);
     color: #000000;
 }
-
-/* Estilos para a Lista de Serviços (Página de Serviços) */
 .lista-servicos {
     display: grid;
     gap: 30px;
 }
-.servico-item { /* Card de serviço na página de serviços */
-    background-color: var(--cor-primaria); /* Ajustado para diferenciar da seção escura */
+.servico-item {
+    background-color: var(--cor-primaria);
     border: 1px solid var(--cor-terciaria);
     border-radius: 8px;
     display: flex;
@@ -445,11 +444,82 @@ header nav ul li a.active::after {
 .servico-preco {
     color: var(--cor-destaque);
 }
-.servico-agendar { /* Botão de agendar dentro do card de serviço */
+.servico-agendar {
     padding: 10px 20px;
     font-size: 0.9rem;
     align-self: flex-start;
-    /* Herda estilos de .cta-button */
+}
+
+/* === Estilos da Página da Equipe === */
+.grid-equipe-detalhada {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+.membro-equipe-card {
+    background-color: var(--cor-primaria);
+    border: 1px solid var(--cor-terciaria);
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.membro-equipe-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+.membro-equipe-imagem {
+    flex: 0 0 280px;
+    object-fit: cover;
+    object-position: center top;
+    border-right: 1px solid var(--cor-terciaria);
+}
+.membro-equipe-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.membro-equipe-info h3 {
+    font-size: 1.8rem;
+    color: var(--cor-destaque);
+    margin-bottom: 8px;
+}
+.membro-equipe-especialidade {
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.membro-equipe-bio {
+    font-size: 0.95rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 20px;
+    line-height: 1.7;
+    flex-grow: 1;
+}
+.membro-equipe-habilidades {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+}
+.membro-equipe-habilidades li {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+.membro-equipe-habilidades li::before {
+    content: '✓';
+    color: var(--cor-destaque);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+.membro-equipe-agendar {
+    align-self: flex-start;
+    padding: 10px 20px;
+    font-size: 0.9rem;
 }
 
 /* === Rodapé (Footer) === */
@@ -513,12 +583,12 @@ footer {
         width: 92%;
     }
     h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.7rem; }
+    /* h2 já é .titulo-pagina ou similar, estilizado abaixo */
+    h3 { font-size: 1.7rem; } /* Afeta H3 dentro de cards também */
 
+    /* Homepage */
     #hero { min-height: 60vh; }
     #hero h2 { font-size: 2.8rem; }
-
     .servicos-grid, .equipe-grid { /* Homepage cards */
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 25px;
@@ -528,9 +598,14 @@ footer {
     }
     .footer-coluna { min-width: 200px; }
 
-    /* Serviços Página */
+    /* Página de Serviços */
+    .titulo-pagina { font-size: 2.3rem; } /* Ajuste para 1024px */
     .servico-imagem { flex-basis: 220px; }
-    .servico-info h3 { font-size: 1.5rem; }
+    .servico-info h3 { font-size: 1.5rem; } /* H3 específico de .servico-info */
+
+    /* Página da Equipe */
+    .membro-equipe-imagem { flex-basis: 240px; }
+    .membro-equipe-info h3 { font-size: 1.7rem; } /* H3 específico de .membro-equipe-info */
 }
 
 /* Para Tablets e Celulares Maiores (Regras para 768px) */
@@ -539,9 +614,10 @@ footer {
     .container { width: 95%; }
 
     h1 { font-size: 2rem; }
-    h2 { font-size: 1.8rem; } /* Afeta .titulo-pagina também se não sobrescrito */
-    h3 { font-size: 1.5rem; }
+    /* h2 já é .titulo-pagina ou similar */
+    h3 { font-size: 1.5rem; } /* Afeta H3 dentro de cards também */
 
+    /* Header */
     header .container {
         flex-direction: column;
         align-items: flex-start;
@@ -583,15 +659,13 @@ footer {
     header nav ul li:last-child a { border-bottom: none; }
     header nav ul li a::after { display: none; }
 
+    /* Homepage */
     #hero { padding: 80px 0; min-height: 50vh; }
     #hero h2 { font-size: 2.2rem; }
     #hero p { font-size: 1.1rem; }
-
     .cta-button, .cta-button-secundario { padding: 10px 20px; font-size: 0.95rem; }
-
     #sobre-nos .container { flex-direction: column; text-align: center; }
     #sobre-nos .sobre-nos-imagem-container { margin: 0 auto 20px auto; max-width: 400px; }
-    
     .servicos-grid, .equipe-grid { /* Homepage cards */
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
@@ -601,7 +675,6 @@ footer {
             grid-template-columns: 1fr;
         }
     }
-
     #galeria-home .galeria-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 10px;
@@ -609,11 +682,10 @@ footer {
     #galeria-home .galeria-grid img { height: 180px; }
     .depoimento-slider { padding-bottom: 10px; }
     .depoimento { min-width: 0; }
-
     .footer-colunas { flex-direction: column; text-align: center; gap: 20px; }
     .footer-coluna { margin-bottom: 15px; min-width: 100%; }
 
-    /* Serviços Página */
+    /* Página de Serviços */
     .titulo-pagina { font-size: 2.2rem; }
     .subtitulo-pagina { font-size: 1rem; }
     #filtros-servicos { margin-bottom: 30px; }
@@ -623,6 +695,21 @@ footer {
     .servico-info { padding: 20px; }
     .servico-info h3 { font-size: 1.4rem; }
     .servico-agendar { width: 100%; text-align: center; }
+
+    /* Página da Equipe */
+    .grid-equipe-detalhada { gap: 30px; }
+    .membro-equipe-card { flex-direction: column; }
+    .membro-equipe-imagem {
+        width: 100%;
+        flex-basis: auto;
+        height: 300px;
+        border-right: none;
+        border-bottom: 1px solid var(--cor-terciaria);
+    }
+    .membro-equipe-info { padding: 25px; }
+    .membro-equipe-info h3 { font-size: 1.6rem; text-align: center; }
+    .membro-equipe-especialidade { text-align: center; }
+    .membro-equipe-agendar { align-self: center; width: 80%; max-width: 300px; text-align: center; }
 }
 
 /* Para Celulares Menores (ex: até 480px) */
@@ -631,18 +718,19 @@ footer {
     .container { width: 90%; }
 
     h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.6rem; margin-bottom: 1.5rem; } /* Afeta .titulo-pagina */
-    h3 { font-size: 1.3rem; }
+    /* h2 - .titulo-pagina */
+    h3 { font-size: 1.3rem; } /* Afeta H3 dentro de cards */
     h4 { font-size: 1.1rem; }
 
+    /* Header */
     header h1 a { font-size: 1.4rem; }
     #menu-toggle { top: 50%; transform: translateY(-50%); right: 10px; font-size: 1.7rem; }
     header .container { padding-right: 50px; }
 
+    /* Homepage */
     #hero { padding: 50px 0; min-height: 40vh; }
     #hero h2 { font-size: 1.9rem; }
     #hero p { font-size: 1rem; margin-bottom: 1.5rem; }
-    
     .cta-button, .cta-button-secundario {
         padding: 12px 18px; font-size: 0.9rem; width: 100%; margin-bottom: 10px;
     }
@@ -650,15 +738,12 @@ footer {
     section .cta-button-secundario, section .cta-button { /* Botões "ver todos" */
         width: auto; max-width: 280px; margin-left: auto; margin-right: auto; display: block;
     }
-
     section { padding: 40px 0; }
-
     .servicos-grid, .equipe-grid { /* Homepage cards */
         grid-template-columns: 1fr; gap: 15px;
     }
     .servico-card, .barbeiro-card { padding: 20px; } /* Homepage cards */
     .servico-card img, .barbeiro-card img { width: 120px; height: 120px; } /* Homepage cards */
-
     #galeria-home .galeria-grid {
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px;
     }
@@ -668,31 +753,9 @@ footer {
     .depoimento h4 { font-size: 0.9rem; }
     .footer-coluna p, .footer-coluna ul li { font-size: 0.9rem; }
 
-    /* Serviços Página */
+    /* Página de Serviços e Página da Equipe */
     .titulo-pagina { font-size: 1.9rem; }
     .subtitulo-pagina { font-size: 0.95rem; margin-bottom: 25px; }
-    #filtros-servicos { display: flex; flex-wrap: wrap; justify-content: center; }
-    .filtro-btn { flex-grow: 1; min-width: 120px; }
-    .servico-info { padding: 15px; }
-    .servico-info h3 { font-size: 1.3rem; }
-    .servico-detalhes { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .servico-duracao, .servico-preco { width: 100%; text-align: center; }
-}
 
-/* Ajustes finos para telas muito pequenas (ex: 360px) */
-@media (max-width: 360px) {
-    body { font-size: 13px; }
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.4rem; } /* Afeta .titulo-pagina */
-    #hero { min-height: auto; padding: 40px 0; }
-    #hero h2 { font-size: 1.7rem; }
-    #hero p { font-size: 0.9rem; }
-
-    .servico-card img, .barbeiro-card img { width: 100px; height: 100px; } /* Homepage cards */
-    #galeria-home .galeria-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
-    #galeria-home .galeria-grid img { height: 100px; }
-    .cta-button, .cta-button-secundario { padding: 10px 15px; }
-
-    /* Serviços Página */
-    .servico-imagem { height: 180px; } /* Ajuste da imagem do serviço */
-    }
+    /* Página de Serviços - Filtros e Itens */
+    #filtros-servicos { display: flex; flex-wrap: wrap;

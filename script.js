@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         linksDoMenu.forEach(link => {
             link.addEventListener('click', function() {
                 const menuEstaAtivo = menuPrincipal.classList.contains('active');
-                // Verifica se o botão de toggle está visível (indicando que estamos em visualização mobile)
-                // getComputedStyle é usado para obter o estilo real do elemento, mesmo que definido em CSS externo
                 const isMobileView = menuToggle && getComputedStyle(menuToggle).display !== 'none';
 
                 if (menuEstaAtivo && isMobileView) {
@@ -53,32 +51,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Destaque do Link Ativo na Navegação ---
-    // Esta funcionalidade básica destaca o link da página atual.
     const linksNav = document.querySelectorAll('#menu-principal a');
-    const urlAtual = window.location.href;
-    const paginaAtual = window.location.pathname; // Ex: "/", "/servicos.html"
+    const paginaAtual = window.location.pathname.split('/').pop(); // Pega o nome do arquivo atual (ex: "servicos.html", "index.html" ou "")
 
     linksNav.forEach(link => {
-        // Remove a classe 'active' de todos os links primeiro para garantir que apenas o correto seja destacado
-        link.classList.remove('active');
+        link.classList.remove('active'); // Remove de todos primeiro
+        const linkHrefBase = link.getAttribute('href').split('/').pop(); // Pega o nome do arquivo do link
 
-        const linkHref = link.getAttribute('href');
-
-        // Lógica para destacar o link correto
-        if (linkHref === paginaAtual || linkHref === paginaAtual.substring(1) || (paginaAtual === '/' && (linkHref === 'index.html' || linkHref === './'))) {
+        if (linkHrefBase === paginaAtual) {
             link.classList.add('active');
-        } else if (urlAtual.includes(linkHref) && linkHref !== '#' && !linkHref.endsWith('index.html') && paginaAtual !== '/') {
-            // Caso mais genérico para outras páginas, evitando index.html se não for a raiz
-             link.classList.add('active');
+        }
+        // Caso especial para a página inicial (index.html ou raiz)
+        if ((paginaAtual === '' || paginaAtual === 'index.html') && (linkHrefBase === 'index.html' || linkHrefBase === '')) {
+            link.classList.add('active');
         }
     });
-    // Tratamento especial para o link "Início" na raiz do site
-    if (paginaAtual === '/' || paginaAtual.endsWith('index.html') || paginaAtual === '') {
-        const linkInicio = document.querySelector('#menu-principal a[href="index.html"]');
-        if(linkInicio) linkInicio.classList.add('active');
-        // Se houver um link para "/" ou "./"
-        const linkRaiz = document.querySelector('#menu-principal a[href="/"], #menu-principal a[href="./"]');
-        if(linkRaiz) linkRaiz.classList.add('active');
+    // Certifica que "Início" (index.html) é o único ativo na raiz.
+    if (paginaAtual === '' || paginaAtual === 'index.html') {
+        linksNav.forEach(link => {
+            const linkHrefBase = link.getAttribute('href').split('/').pop();
+            if (linkHrefBase !== 'index.html' && linkHrefBase !== '') {
+                link.classList.remove('active');
+            }
+        });
     }
 
 
@@ -97,5 +92,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // --- FUNCIONALIDADE DE FILTRO PARA A PÁGINA DE SERVIÇOS ---
+    const secaoFiltros = document.getElementById('filtros-servicos');
+    const listaDeServicos = document.querySelector('.lista-servicos');
+
+    if (secaoFiltros && listaDeServicos) {
+        const botoesFiltro = secaoFiltros.querySelectorAll('.filtro-btn');
+        const itensServico = listaDeServicos.querySelectorAll('.servico-item');
+
+        // Define o estado inicial dos filtros: Botão "Todos" ativo e todos os itens visíveis
+        // Isso garante que, se o usuário sair e voltar para a página, os filtros estejam corretos.
+        const botaoTodosInicial = secaoFiltros.querySelector('.filtro-btn[data-categoria="todos"]');
+        if (botaoTodosInicial) {
+            botoesFiltro.forEach(btn => btn.classList.remove('active')); // Limpa qualquer 'active' residual
+            botaoTodosInicial.classList.add('active');
+        }
+        itensServico.forEach(item => {
+            item.style.display = 'flex'; // Garante que todos estejam visíveis inicialmente
+        });
+
+
+        botoesFiltro.forEach(botao => {
+            botao.addEventListener('click', function() {
+                botoesFiltro.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                const categoriaSelecionada = this.getAttribute('data-categoria');
+
+                itensServico.forEach(item => {
+                    const categoriaDoItem = item.getAttribute('data-categoria');
+                    if (categoriaSelecionada === 'todos' || categoriaDoItem === categoriaSelecionada) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+    // --- FIM DA FUNCIONALIDADE DE FILTRO ---
 
 }); // Fim do document.addEventListener('DOMContentLoaded')

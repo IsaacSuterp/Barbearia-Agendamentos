@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Serviços - Barbearia Seu Estilo</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Barbearia Seu Estilo</a></h1>
+            <nav>
+                <button id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+                <ul id="menu-principal">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços</a></li> <li><a href="agendamento.html">Agendamento</a></li>
+                    <li><a href="equipe.html">Equipe</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="pagina-servicos" class="pagina-conteudo">
+            <div class="container">
+                <h2 class="titulo-pagina">Nossos Serviços</h2>
+                <p class="subtitulo-pagina">Qualidade e precisão em cada detalhe para o seu estilo.</p>
+
+                <div id="filtros-servicos" style="margin-bottom: 30px; text-align: center;">
+                    <button class="filtro-btn active" data-categoria="todos">Todos</button>
+                    <button class="filtro-btn" data-categoria="cabelo">Cabelo</button>
+                    <button class="filtro-btn" data-categoria="barba">Barba</button>
+                    <button class="filtro-btn" data-categoria="tratamentos">Tratamentos</button>
+                    <button class="filtro-btn" data-categoria="pacotes">Pacotes</button>
+                </div>
+
+                <div class="lista-servicos">
+                    <article class="servico-item" data-categoria="cabelo">
+                        <img src="servico-corte-moderno.jpg" alt="Corte Moderno Masculino" class="servico-imagem">
+                        <div class="servico-info">
+                            <h3>Corte Moderno</h3>
+                            <p class="servico-descricao">Inclui lavagem especial, consultoria de estilo, corte personalizado com as últimas tendências (tesoura e/ou máquina) e finalização com produtos premium.</p>
+                            <div class="servico-detalhes">
+                                <span class="servico-duracao">Duração: 60 min</span>
+                                <span class="servico-preco">Preço: R$ 70,00</span>
+                            </div>
+                            <a href="agendamento.html?servico=corte-moderno" class="cta-button servico-agendar">Agendar Serviço</a>
+                        </div>
+                    </article>
+
+                    <article class="servico-item" data-categoria="barba">
+                        <img src="servico-barba-premium.jpg" alt="Barba Premium com Toalha Quente" class="servico-imagem">
+                        <div class="servico-info">
+                            <h3>Barba Premium (Barba Terapia)</h3>
+                            <p class="servico-descricao">Uma experiência completa para sua barba: design personalizado, esfoliação, toalha quente, navalha, massagem facial e hidratação com óleos essenciais.</p>
+                            <div class="servico-detalhes">
+                                <span class="servico-duracao">Duração: 45 min</span>
+                                <span class="servico-preco">Preço: R$ 60,00</span>
+                            </div>
+                            <a href="agendamento.html?servico=barba-premium" class="cta-button servico-agendar">Agendar Serviço</a>
+                        </div>
+                    </article>
+
+                    <article class="servico-item" data-categoria="pacotes">
+                        <img src="servico-combo-vip.jpg" alt="Pacote VIP Corte e Barba" class="servico-imagem">
+                        <div class="servico-info">
+                            <h3>Pacote VIP (Corte Moderno + Barba Premium)</h3>
+                            <p class="servico-descricao">A combinação perfeita para um visual impecável. Inclui todos os benefícios do Corte Moderno e da Barba Premium com um valor especial.</p>
+                            <div class="servico-detalhes">
+                                <span class="servico-duracao">Duração: 1h 45 min</span>
+                                <span class="servico-preco">Preço: R$ 120,00</span>
+                            </div>
+                            <a href="agendamento.html?servico=pacote-vip" class="cta-button servico-agendar">Agendar Serviço</a>
+                        </div>
+                    </article>
+
+                    <article class="servico-item" data-categoria="cabelo">
+                        <img src="servico-corte-infantil.jpg" alt="Corte Infantil" class="servico-imagem">
+                        <div class="servico-info">
+                            <h3>Corte Infantil (Até 12 anos)</h3>
+                            <p class="servico-descricao">Cortes divertidos e estilosos para os pequenos, com toda a paciência e cuidado que eles merecem. Finalização com penteado.</p>
+                            <div class="servico-detalhes">
+                                <span class="servico-duracao">Duração: 40 min</span>
+                                <span class="servico-preco">Preço: R$ 45,00</span>
+                            </div>
+                            <a href="agendamento.html?servico=corte-infantil" class="cta-button servico-agendar">Agendar Serviço</a>
+                        </div>
+                    </article>
+
+                     <article class="servico-item" data-categoria="tratamentos">
+                        <img src="servico-hidratacao.jpg" alt="Hidratação Capilar Profunda" class="servico-imagem">
+                        <div class="servico-info">
+                            <h3>Hidratação Capilar Profunda</h3>
+                            <p class="servico-descricao">Tratamento intensivo para restaurar a saúde, brilho e maciez dos fios. Ideal para cabelos ressecados ou danificados.</p>
+                            <div class="servico-detalhes">
+                                <span class="servico-duracao">Duração: 30 min</span>
+                                <span class="servico-preco">Preço: R$ 50,00</span>
+                            </div>
+                            <a href="agendamento.html?servico=hidratacao" class="cta-button servico-agendar">Agendar Serviço</a>
+                        </div>
+                    </article>
+
+                    </div> </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-colunas">
+                <div class="footer-coluna">
+                    <h4>Barbearia Seu Estilo</h4>
+                    <p>Rua das Tesouras, 123<br>Bairro Navalha, Cidade Estilo - ES<br>CEP: 00000-000</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Contato</h4>
+                    <p>Telefone: (27) 99999-8888</p>
+                    <p>Email: contato@seuestilo.com.br</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Horário de Funcionamento</h4>
+                    <p>Seg - Sex: 09:00 - 20:00</p>
+                    <p>Sáb: 09:00 - 18:00</p>
+                    <p>Dom: Fechado</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Redes Sociais</h4>
+                    <ul class="redes-sociais">
+                        <li><a href="#" target="_blank" aria-label="Facebook">FB</a></li>
+                        <li><a href="#" target="_blank" aria-label="Instagram">IG</a></li>
+                        <li><a href="#" target="_blank" aria-label="WhatsApp">WA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-direitos">
+                <p>&copy; <span id="ano-atual">2024</span> Barbearia Seu Estilo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

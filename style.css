@@ -1,0 +1,714 @@
+/* style.css */
+
+/* === Variáveis CSS === */
+:root {
+    --cor-primaria: #121212; /* Fundo bem escuro */
+    --cor-secundaria: #1e1e1e; /* Fundo para seções/cards */
+    --cor-terciaria: #2a2a2a; /* Bordas ou detalhes sutis */
+    --cor-texto-principal: #e0e0e0; /* Texto claro principal */
+    --cor-texto-secundario: #a0a0a0; /* Texto claro secundário */
+    --cor-destaque: #c89b3c; /* Dourado/Bronze para CTAs e links */
+    --cor-destaque-hover: #dfad52; /* Dourado/Bronze mais claro para hover */
+    --fonte-principal: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --fonte-titulos: 'Georgia', 'Times New Roman', Times, serif;
+}
+
+/* === Reset Básico e Estilos Globais === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-principal);
+    font-size: 16px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0; /* Espaçamento vertical padrão dentro do container */
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-destaque);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.3rem; color: var(--cor-texto-principal); }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--cor-texto-secundario);
+}
+
+a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-destaque-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+section {
+    padding: 60px 0; /* Espaçamento vertical padrão para seções */
+}
+
+/* Cor de fundo alternada para algumas seções para melhor distinção visual */
+#sobre-nos, #nossa-equipe, #depoimentos {
+    background-color: var(--cor-secundaria);
+}
+
+
+/* === Cabeçalho (Header) === */
+header {
+    background-color: var(--cor-secundaria); /* Mantido igual a outras seções para um look coeso */
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--cor-terciaria);
+    position: sticky; /* Faz o cabeçalho ficar fixo no topo ao rolar */
+    top: 0;
+    z-index: 1000; /* Garante que o header fique sobre outros elementos */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+header h1 a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--cor-destaque);
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: var(--cor-texto-principal);
+    font-weight: bold;
+    padding: 0.5rem 0;
+    position: relative; /* Para o efeito de sublinhado */
+}
+
+header nav ul li a::after { /* Efeito de sublinhado no hover */
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Posição do sublinhado */
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-destaque);
+    transition: width 0.3s ease;
+}
+
+header nav ul li a:hover::after,
+header nav ul li a.active::after { /* .active pode ser adicionado via JS */
+    width: 100%;
+}
+
+#menu-toggle { /* Botão do Menu Hambúrguer */
+    display: none; /* Escondido em telas maiores */
+    background: none;
+    border: none;
+    color: var(--cor-destaque);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* === Botões CTA (Call to Action) === */
+.cta-button, .cta-button-secundario {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--cor-destaque);
+    color: #000000 !important; /* Texto preto para contraste forte com dourado */
+    font-family: var(--fonte-principal);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+    text-align: center;
+    border: 2px solid var(--cor-destaque); /* Borda para ambos os tipos de botão */
+    cursor: pointer;
+}
+
+.cta-button:hover, .cta-button-secundario:hover {
+    background-color: var(--cor-destaque-hover);
+    border-color: var(--cor-destaque-hover);
+    color: #000000 !important;
+    transform: translateY(-2px); /* Leve elevação no hover */
+}
+
+.cta-button-secundario {
+    background-color: transparent;
+    color: var(--cor-destaque) !important;
+}
+
+.cta-button-secundario:hover {
+    background-color: var(--cor-destaque); /* Preenche no hover */
+    color: #000000 !important; /* Texto preto no hover */
+}
+
+/* === Seção Hero === */
+#hero {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('hero-background.jpg') no-repeat center center/cover;
+    /* Substitua 'hero-background.jpg' por sua imagem de fundo */
+    color: #fff;
+    text-align: center;
+    padding: 100px 0; /* Aumentar padding vertical */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Altura mínima para ocupar boa parte da tela inicial */
+}
+
+#hero .container {
+    max-width: 800px; /* Limitar largura do conteúdo do hero */
+}
+
+#hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff; /* Texto branco para melhor leitura sobre a imagem */
+    font-weight: bold;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--cor-texto-principal);
+}
+
+/* === Seção Sobre Nós === */
+#sobre-nos .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px; /* Aumentar o espaço entre imagem e texto */
+}
+#sobre-nos .sobre-nos-texto {
+    flex: 1;
+    min-width: 300px;
+}
+#sobre-nos .sobre-nos-imagem-container { /* Adicionado container para a imagem */
+    flex: 1;
+    min-width: 300px;
+    max-width: 480px; /* Limitar tamanho da imagem */
+}
+#sobre-nos img.sobre-nos-imagem {
+    border-radius: 8px;
+    border: 3px solid var(--cor-terciaria);
+    padding: 5px;
+    background-color: var(--cor-primaria); /* Cor de fundo da imagem para destaque */
+    width: 100%; /* Garante que a imagem preencha o container */
+}
+
+
+/* === Seção Nossos Serviços & Nossa Equipe (Cards) === */
+.servicos-grid, .equipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Layout responsivo de cards */
+    gap: 30px;
+    margin-bottom: 2rem;
+}
+
+.servico-card, .barbeiro-card {
+    background-color: var(--cor-primaria); /* Alterado para fundo primário para contraste com seção */
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--cor-terciaria);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Para alinhar conteúdo verticalmente */
+    flex-direction: column; /* Empilhar itens */
+    justify-content: space-between; /* Para o link ficar na base */
+}
+
+.servico-card:hover, .barbeiro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.servico-card img, .barbeiro-card img {
+    width: 150px; /* Tamanho da imagem do serviço/barbeiro */
+    height: 150px;
+    border-radius: 50%; /* Imagens redondas */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    margin: 0 auto 20px auto; /* Aumentar margem inferior */
+    border: 4px solid var(--cor-destaque); /* Borda mais grossa e destacada */
+}
+
+.servico-card h4, .barbeiro-card h4 {
+    margin-bottom: 0.75rem; /* Mais espaço após o título do card */
+    color: var(--cor-destaque);
+    font-size: 1.4rem; /* Aumentar um pouco o título do card */
+}
+.servico-card p, .barbeiro-card p {
+    font-size: 0.95rem;
+    flex-grow: 1; /* Faz o parágrafo ocupar o espaço disponível */
+    margin-bottom: 1rem;
+}
+
+.servico-link, .equipe-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border: 1px solid var(--cor-destaque);
+    border-radius: 4px;
+    color: var(--cor-destaque);
+}
+.servico-link:hover, .equipe-link:hover {
+    background-color: var(--cor-destaque);
+    color: #000;
+}
+
+
+/* === Seção Galeria Home === */
+#galeria-home .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Imagens um pouco maiores */
+    gap: 15px;
+}
+
+#galeria-home .galeria-grid img {
+    width: 100%;
+    height: 220px; /* Altura fixa para as imagens da galeria */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    border-radius: 5px;
+    border: 2px solid var(--cor-terciaria);
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+#galeria-home .galeria-grid img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+}
+
+/* === Seção Depoimentos === */
+#depoimentos {
+    background-color: var(--cor-secundaria);
+}
+.depoimento-slider {
+    display: grid; /* Usar grid para melhor controle */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    /* Para um slider real, JavaScript seria necessário para navegação e ocultação de itens */
+}
+.depoimento {
+    background-color: var(--cor-primaria); /* Contraste com a seção */
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid var(--cor-destaque);
+    /* min-width: 280px;  Removido pois o grid controla a largura */
+    /* flex-shrink: 0;  Removido */
+}
+
+.depoimento p {
+    font-style: italic;
+    color: var(--cor-texto-principal);
+    margin-bottom: 1rem; /* Mais espaço antes do nome */
+    font-size: 1rem;
+}
+
+.depoimento h4 {
+    text-align: right;
+    font-size: 1rem;
+    color: var(--cor-destaque);
+    font-weight: bold;
+}
+
+
+/* === Rodapé (Footer) === */
+footer {
+    background-color: var(--cor-primaria); /* Rodapé mais escuro */
+    color: var(--cor-texto-secundario);
+    padding: 50px 0 20px 0; /* Mais padding no topo */
+    border-top: 3px solid var(--cor-destaque); /* Borda destacada no topo */
+}
+
+.footer-colunas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Espaço entre as colunas */
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.footer-coluna {
+    flex: 1; /* Colunas flexíveis */
+    min-width: 220px; /* Largura mínima para cada coluna antes de quebrar */
+}
+
+.footer-coluna h4 {
+    color: var(--cor-destaque);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-coluna p, .footer-coluna ul li {
+    margin-bottom: 10px; /* Aumentar espaçamento */
+    font-size: 0.95rem;
+}
+.footer-coluna ul li a:hover {
+    color: var(--cor-destaque-hover);
+}
+
+.redes-sociais li {
+    display: inline-block;
+    margin-right: 15px; /* Mais espaço entre ícones */
+}
+.redes-sociais li:last-child {
+    margin-right: 0;
+}
+
+.redes-sociais li a {
+    font-size: 1.6rem; /* Tamanho dos "ícones" de texto */
+    color: var(--cor-texto-secundario);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.redes-sociais li a:hover {
+    color: var(--cor-destaque);
+    transform: scale(1.1);
+}
+
+.footer-direitos {
+    text-align: center;
+    padding-top: 30px; /* Mais espaço acima */
+    border-top: 1px solid var(--cor-terciaria);
+    font-size: 0.9em;
+}
+
+/* === Responsividade Aprimorada === */
+
+/* Para Tablets Maiores e Desktops Pequenos (ex: até 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        width: 92%; /* Um pouco mais de largura lateral */
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.7rem; }
+
+    #hero {
+        min-height: 60vh;
+    }
+    #hero h2 {
+        font-size: 2.8rem; /* Ajuste no tamanho do título do hero */
+    }
+
+    .servicos-grid, .equipe-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Cards um pouco menores */
+        gap: 25px;
+    }
+     #galeria-home .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .footer-coluna {
+        min-width: 200px; /* Reajuste para colunas do rodapé */
+    }
+}
+
+/* Para Tablets e Celulares Maiores (Regras para 768px - Revisadas e Complementadas) */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px; /* Leve redução na fonte base */
+    }
+
+    .container {
+        width: 95%; /* Mais espaço lateral em tablets */
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.5rem; }
+
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 60px; /* Espaço para o menu toggle não sobrepor o logo */
+        position: relative; /* Para posicionar o #menu-toggle absoluto a ele */
+    }
+    
+    header h1 a {
+        font-size: 1.6rem; /* Reduzir um pouco o logo */
+        margin-bottom: 0.5rem; /* Espaço se o menu estiver abaixo */
+    }
+
+    #menu-toggle {
+        display: block; /* Mostrar o botão do menu hambúrguer */
+        position: absolute; /* Posicionar em relação ao header .container */
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
+        font-size: 1.8rem; /* Tamanho do ícone do menu */
+    }
+
+    header nav {
+        width: 100%;
+        margin-top: 0; /* Reset margin se o menu toggle estiver ao lado do logo */
+    }
+    header nav ul { /* Oculto por padrão, JS controla 'active' */
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--cor-secundaria); /* Fundo para o menu dropdown */
+        position: absolute;
+        top: 100%; /* Abaixo do header */
+        left: 0;
+        border-top: 1px solid var(--cor-terciaria);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    header nav ul.active { /* Classe a ser adicionada via JS */
+        display: flex;
+    }
+    header nav ul li {
+        margin: 0;
+        width: 100%;
+        text-align: left; /* Alinhar texto à esquerda no dropdown */
+    }
+    header nav ul li a {
+        display: block;
+        padding: 1rem 1.5rem; /* Aumentar área de toque e padding lateral */
+        font-size: 1rem;
+        border-bottom: 1px solid var(--cor-terciaria);
+    }
+    header nav ul li:last-child a {
+        border-bottom: none;
+    }
+    header nav ul li a::after { /* Remover sublinhado no mobile */
+        display: none;
+    }
+
+    #hero {
+        padding: 80px 0;
+        min-height: 50vh;
+    }
+    #hero h2 {
+        font-size: 2.2rem;
+    }
+    #hero p {
+        font-size: 1.1rem;
+    }
+
+    .cta-button, .cta-button-secundario {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    #sobre-nos .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    #sobre-nos .sobre-nos-imagem-container { /* Ajuste para imagem em telas menores */
+        margin: 0 auto 20px auto; /* Centralizar imagem */
+        max-width: 400px; /* Limitar um pouco */
+    }
+    
+    .servicos-grid, .equipe-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+     /* Forçar uma coluna se o minmax não for suficiente em telas menores dentro deste breakpoint */
+    @media (max-width: 580px) { /* Breakpoint aninhado para ajuste fino */
+        .servicos-grid, .equipe-grid, #depoimentos .depoimento-slider {
+            grid-template-columns: 1fr; /* Uma coluna */
+        }
+    }
+
+    #galeria-home .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste */
+        gap: 10px;
+    }
+    #galeria-home .galeria-grid img {
+        height: 180px;
+    }
+
+    .depoimento-slider {
+        padding-bottom: 10px; 
+    }
+    .depoimento {
+        min-width: 0; /* Resetar min-width pois o grid cuida disso */
+    }
+
+    .footer-colunas {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px; /* Espaçamento entre colunas empilhadas */
+    }
+    .footer-coluna {
+        margin-bottom: 15px; /* Espaçamento inferior para cada coluna */
+        min-width: 100%; /* Ocupar toda a largura */
+    }
+}
+
+/* Para Celulares Menores (ex: até 480px) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px; /* Reduzir ainda mais a fonte base */
+        line-height: 1.5;
+    }
+
+    .container {
+        width: 90%; /* Deixar um pouco de margem nas laterais */
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+
+    header h1 a {
+        font-size: 1.4rem;
+    }
+    
+    #menu-toggle {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px; /* Menos espaço lateral */
+        font-size: 1.7rem;
+    }
+    header .container { /* Ajuste para o logo não ficar muito espremido */
+        padding-right: 50px; 
+    }
+
+
+    #hero {
+        padding: 50px 0;
+        min-height: 40vh;
+    }
+    #hero h2 {
+        font-size: 1.9rem;
+    }
+    #hero p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-button, .cta-button-secundario {
+        padding: 12px 18px; /* Ajuste para área de toque */
+        font-size: 0.9rem;
+        width: 100%; /* Botões ocupam largura total para fácil toque */
+        margin-bottom: 10px; /* Espaçamento se houver múltiplos botões */
+    }
+    .cta-button:last-child, .cta-button-secundario:last-child {
+        margin-bottom: 0;
+    }
+     section .cta-button-secundario, section .cta-button { /* Para botões de "ver todos" nas seções */
+        width: auto; /* Restaurar largura automática para botões dentro de seções */
+        max-width: 280px; /* Limitar largura para não ficarem muito grandes */
+        margin-left: auto;
+        margin-right: auto;
+        display: block; /* Para centralizar com margin auto */
+     }
+
+
+    section {
+        padding: 40px 0; /* Reduzir padding das seções */
+    }
+
+    .servicos-grid, .equipe-grid {
+        grid-template-columns: 1fr; /* Uma coluna */
+        gap: 15px;
+    }
+    .servico-card, .barbeiro-card {
+        padding: 20px;
+    }
+    .servico-card img, .barbeiro-card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    #galeria-home .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Imagens menores na galeria */
+        gap: 8px;
+    }
+     #galeria-home .galeria-grid img {
+        height: 130px;
+     }
+
+    .depoimento {
+        padding: 15px;
+    }
+    .depoimento p {
+        font-size: 0.95rem;
+    }
+    .depoimento h4 {
+        font-size: 0.9rem;
+    }
+
+    .footer-coluna p, .footer-coluna ul li {
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajustes finos para telas muito pequenas (ex: 320px - opcional, mas bom para robustez) */
+@media (max-width: 360px) {
+    body {
+        font-size: 13px;
+    }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.4rem; }
+    #hero {
+        min-height: auto; /* Remover min-height para telas muito pequenas */
+        padding: 40px 0;
+    }
+    #hero h2 {
+        font-size: 1.7rem;
+    }
+    #hero p {
+        font-size: 0.9rem;
+    }
+    .servico-card img, .barbeiro-card img {
+        width: 100px;
+        height: 100px;
+    }
+     #galeria-home .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+     #galeria-home .galeria-grid img {
+        height: 100px;
+     }
+
+    .cta-button, .cta-button-secundario {
+        padding: 10px 15px;
+    }
+  }

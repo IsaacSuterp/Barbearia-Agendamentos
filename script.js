@@ -55,23 +55,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const paginaAtual = window.location.pathname.split('/').pop(); // Pega o nome do arquivo atual (ex: "servicos.html", "index.html" ou "")
 
     linksNav.forEach(link => {
-        link.classList.remove('active'); // Remove de todos primeiro
-        const linkHrefBase = link.getAttribute('href').split('/').pop(); // Pega o nome do arquivo do link
+        link.classList.remove('active'); 
+        const linkHrefBase = link.getAttribute('href').split('/').pop();
 
         if (linkHrefBase === paginaAtual) {
             link.classList.add('active');
         }
-        // Caso especial para a página inicial (index.html ou raiz)
-        if ((paginaAtual === '' || paginaAtual === 'index.html') && (linkHrefBase === 'index.html' || linkHrefBase === '')) {
+        if ((paginaAtual === '' || paginaAtual === 'index.html') && (linkHrefBase === 'index.html' || linkHrefBase === '' || linkHrefBase === './')) {
             link.classList.add('active');
         }
     });
-    // Certifica que "Início" (index.html) é o único ativo na raiz.
+    // Certifica que "Início" (index.html) é o único ativo na raiz, caso outros links também correspondam a "/"
     if (paginaAtual === '' || paginaAtual === 'index.html') {
+        let inicioAtivado = false;
         linksNav.forEach(link => {
             const linkHrefBase = link.getAttribute('href').split('/').pop();
-            if (linkHrefBase !== 'index.html' && linkHrefBase !== '') {
-                link.classList.remove('active');
+            if ((linkHrefBase === 'index.html' || linkHrefBase === '' || linkHrefBase === './')) {
+                if (!inicioAtivado) {
+                    link.classList.add('active');
+                    inicioAtivado = true;
+                } else {
+                    link.classList.remove('active');
+                }
+            } else if (inicioAtivado) { // Se o link de início já foi ativado, remove 'active' dos outros
+                 link.classList.remove('active');
             }
         });
     }
@@ -101,17 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const botoesFiltro = secaoFiltros.querySelectorAll('.filtro-btn');
         const itensServico = listaDeServicos.querySelectorAll('.servico-item');
 
-        // Define o estado inicial dos filtros: Botão "Todos" ativo e todos os itens visíveis
-        // Isso garante que, se o usuário sair e voltar para a página, os filtros estejam corretos.
+        // Garante que o botão "Todos" esteja ativo e todos os itens visíveis ao carregar a página de serviços
         const botaoTodosInicial = secaoFiltros.querySelector('.filtro-btn[data-categoria="todos"]');
-        if (botaoTodosInicial) {
-            botoesFiltro.forEach(btn => btn.classList.remove('active')); // Limpa qualquer 'active' residual
-            botaoTodosInicial.classList.add('active');
+        if (botaoTodosInicial && !botaoTodosInicial.classList.contains('active')) {
+             botoesFiltro.forEach(btn => btn.classList.remove('active'));
+             botaoTodosInicial.classList.add('active');
         }
         itensServico.forEach(item => {
-            item.style.display = 'flex'; // Garante que todos estejam visíveis inicialmente
+            item.style.display = 'flex'; 
         });
-
 
         botoesFiltro.forEach(botao => {
             botao.addEventListener('click', function() {
@@ -134,5 +139,67 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     // --- FIM DA FUNCIONALIDADE DE FILTRO ---
+
+    // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
+    const formContato = document.getElementById('form-contato');
+    const formStatusDiv = document.getElementById('form-status');
+
+    if (formContato && formStatusDiv) {
+
+        formContato.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            formStatusDiv.innerHTML = '';
+            formStatusDiv.className = 'form-status-mensagem'; 
+
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+            const mensagemInput = document.getElementById('mensagem');
+
+            let erros = []; 
+
+            if (nomeInput.value.trim() === '') {
+                erros.push('O campo Nome Completo é obrigatório.');
+            }
+            if (emailInput.value.trim() === '') {
+                erros.push('O campo Email é obrigatório.');
+            } else if (!isValidEmail(emailInput.value.trim())) {
+                erros.push('Por favor, insira um endereço de email válido.');
+            }
+            if (mensagemInput.value.trim() === '') {
+                erros.push('O campo Mensagem é obrigatório.');
+            }
+
+            if (erros.length > 0) {
+                let ulErros = '<ul>';
+                erros.forEach(function(erro) {
+                    ulErros += '<li>' + erro + '</li>';
+                });
+                ulErros += '</ul>';
+                
+                formStatusDiv.innerHTML = ulErros;
+                formStatusDiv.classList.add('error'); 
+                formStatusDiv.style.display = 'block'; 
+            } else {
+                formStatusDiv.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+                formStatusDiv.classList.add('success'); 
+                formStatusDiv.style.display = 'block'; 
+
+                formContato.reset();
+
+                setTimeout(function() {
+                    formStatusDiv.innerHTML = '';
+                    formStatusDiv.className = 'form-status-mensagem';
+                    formStatusDiv.style.display = 'none';
+                }, 5000); 
+            }
+        });
+
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    }
+    // --- FIM DA VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
 
 }); // Fim do document.addEventListener('DOMContentLoaded')

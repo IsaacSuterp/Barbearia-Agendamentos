@@ -13,37 +13,31 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExpanded = menuPrincipal.classList.contains('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
             if (isExpanded) {
-                menuToggle.innerHTML = '&times;'; // Muda para 'X' (símbolo de fechar)
+                menuToggle.innerHTML = '&times;'; 
                 menuToggle.setAttribute('aria-label', 'Fechar menu');
             } else {
-                menuToggle.innerHTML = '&#9776;'; // Volta para o ícone de hambúrguer
+                menuToggle.innerHTML = '&#9776;'; 
                 menuToggle.setAttribute('aria-label', 'Abrir menu');
             }
         });
-    } else {
-        // Não loga erro se os elementos não estiverem presentes em todas as páginas
-        // console.warn("Elementos do menu hambúrguer não encontrados nesta página.");
     }
 
     // --- Funcionalidade para Atualizar o Ano no Rodapé ---
     if (anoAtualSpan) {
         const data = new Date();
         anoAtualSpan.textContent = data.getFullYear();
-    } else {
-        // console.warn("Elemento para exibir o ano atual não encontrado nesta página.");
     }
 
-    // --- Opcional: Fechar o menu ao clicar em um link (para Single Page Apps ou navegação na mesma página) ---
+    // --- Opcional: Fechar o menu ao clicar em um link ---
     if (menuPrincipal) {
         const linksDoMenu = menuPrincipal.querySelectorAll('a');
         linksDoMenu.forEach(link => {
             link.addEventListener('click', function() {
                 const menuEstaAtivo = menuPrincipal.classList.contains('active');
                 const isMobileView = menuToggle && getComputedStyle(menuToggle).display !== 'none';
-
                 if (menuEstaAtivo && isMobileView) {
                     menuPrincipal.classList.remove('active');
-                    if(menuToggle) { // Verifica se menuToggle existe antes de modificar
+                    if(menuToggle) {
                         menuToggle.setAttribute('aria-expanded', 'false');
                         menuToggle.innerHTML = '&#9776;'; 
                         menuToggle.setAttribute('aria-label', 'Abrir menu');
@@ -57,14 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const linksNav = document.querySelectorAll('#menu-principal a');
     if (linksNav.length > 0) {
         const paginaAtual = window.location.pathname.split('/').pop(); 
-
         linksNav.forEach(link => {
             link.classList.remove('active'); 
             const linkHrefBase = link.getAttribute('href').split('/').pop();
-
-            if (linkHrefBase === paginaAtual) {
-                link.classList.add('active');
-            }
+            if (linkHrefBase === paginaAtual) { link.classList.add('active'); }
             if ((paginaAtual === '' || paginaAtual === 'index.html') && (linkHrefBase === 'index.html' || linkHrefBase === '' || linkHrefBase === './')) {
                 link.classList.add('active');
             }
@@ -74,19 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
             linksNav.forEach(link => {
                 const linkHrefBase = link.getAttribute('href').split('/').pop();
                 if ((linkHrefBase === 'index.html' || linkHrefBase === '' || linkHrefBase === './')) {
-                    if (!inicioAtivado) {
-                        link.classList.add('active');
-                        inicioAtivado = true;
-                    } else {
-                        link.classList.remove('active');
-                    }
-                } else if (inicioAtivado) { 
-                     link.classList.remove('active');
-                }
+                    if (!inicioAtivado) { link.classList.add('active'); inicioAtivado = true; } 
+                    else { link.classList.remove('active'); }
+                } else if (inicioAtivado) { link.classList.remove('active'); }
             });
         }
     }
-
 
     // --- Resetar o menu ao redimensionar para desktop ---
     window.addEventListener('resize', function() {
@@ -106,44 +89,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- FUNCIONALIDADE DE FILTRO PARA A PÁGINA DE SERVIÇOS ---
     const secaoFiltros = document.getElementById('filtros-servicos');
     const listaDeServicos = document.querySelector('.lista-servicos');
-
     if (secaoFiltros && listaDeServicos) {
         const botoesFiltro = secaoFiltros.querySelectorAll('.filtro-btn');
         const itensServico = listaDeServicos.querySelectorAll('.servico-item');
-
         const botaoTodosInicialFiltro = secaoFiltros.querySelector('.filtro-btn[data-categoria="todos"]');
         if (botaoTodosInicialFiltro && !botaoTodosInicialFiltro.classList.contains('active')) {
              botoesFiltro.forEach(btn => btn.classList.remove('active'));
              botaoTodosInicialFiltro.classList.add('active');
         }
-        itensServico.forEach(item => {
-            item.style.display = 'flex'; 
-        });
-
+        itensServico.forEach(item => { item.style.display = 'flex'; });
         botoesFiltro.forEach(botao => {
             botao.addEventListener('click', function() {
-                botoesFiltro.forEach(btn => {
-                    btn.classList.remove('active');
-                });
+                botoesFiltro.forEach(btn => { btn.classList.remove('active'); });
                 this.classList.add('active');
                 const categoriaSelecionada = this.getAttribute('data-categoria');
                 itensServico.forEach(item => {
                     const categoriaDoItem = item.getAttribute('data-categoria');
                     if (categoriaSelecionada === 'todos' || categoriaDoItem === categoriaSelecionada) {
                         item.style.display = 'flex';
-                    } else {
-                        item.style.display = 'none';
-                    }
+                    } else { item.style.display = 'none'; }
                 });
             });
         });
     }
-    // --- FIM DA FUNCIONALIDADE DE FILTRO ---
 
     // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
     const formContato = document.getElementById('form-contato');
     const formStatusDiv = document.getElementById('form-status');
-
     if (formContato && formStatusDiv) {
         formContato.addEventListener('submit', function(event) {
             event.preventDefault(); 
@@ -157,32 +129,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (emailInput.value.trim() === '') { erros.push('O campo Email é obrigatório.'); } 
             else if (!isValidEmail(emailInput.value.trim())) { erros.push('Por favor, insira um endereço de email válido.');}
             if (mensagemInput.value.trim() === '') { erros.push('O campo Mensagem é obrigatório.'); }
-
             if (erros.length > 0) {
-                let ulErros = '<ul>';
-                erros.forEach(function(erro) { ulErros += '<li>' + erro + '</li>'; });
-                ulErros += '</ul>';
-                formStatusDiv.innerHTML = ulErros;
-                formStatusDiv.classList.add('error'); 
-                formStatusDiv.style.display = 'block'; 
+                let ulErros = '<ul>'; erros.forEach(function(erro) { ulErros += '<li>' + erro + '</li>'; }); ulErros += '</ul>';
+                formStatusDiv.innerHTML = ulErros; formStatusDiv.classList.add('error'); formStatusDiv.style.display = 'block'; 
             } else {
                 formStatusDiv.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
-                formStatusDiv.classList.add('success'); 
-                formStatusDiv.style.display = 'block'; 
+                formStatusDiv.classList.add('success'); formStatusDiv.style.display = 'block'; 
                 formContato.reset();
-                setTimeout(function() {
-                    formStatusDiv.innerHTML = '';
-                    formStatusDiv.className = 'form-status-mensagem';
-                    formStatusDiv.style.display = 'none';
-                }, 5000); 
+                setTimeout(function() { formStatusDiv.innerHTML = ''; formStatusDiv.className = 'form-status-mensagem'; formStatusDiv.style.display = 'none';}, 5000); 
             }
         });
     }
-    // --- FIM DA VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
-
+    
     // --- LÓGICA DO FORMULÁRIO DE AGENDAMENTO MULTI-PASSOS ---
     const formAgendamento = document.getElementById('form-agendamento');
-
     if (formAgendamento) {
         const passosFieldsets = formAgendamento.querySelectorAll('fieldset.agendamento-passo');
         const btnAnterior = document.getElementById('btn-anterior');
@@ -190,31 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnConfirmarAgendamento = document.getElementById('btn-confirmar-agendamento');
         const indicadoresProgresso = document.querySelectorAll('.progresso-agendamento .passo-indicador');
         const divStatusAgendamento = document.getElementById('agendamento-status');
-
         let passoAtual = 1;
         const totalPassos = passosFieldsets.length;
-        
-        let dadosAgendamento = {
-            servicosSelecionados: [], 
-            barbeiro: { id: 'qualquer', nome: 'Qualquer Barbeiro Disponível' }, 
-            data: null, horario: null,
-            cliente: { nome: '', email: '', telefone: '', observacoes: '' },
-            duracaoTotal: 0, precoTotal: 0.00
-        };
-
-        const horariosFuncionamento = { 
-            0: null, 
-            1: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 
-            2: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 
-            3: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 
-            4: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 
-            5: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 
-            6: { inicio: '09:00', fim: '18:00', almocoInicio: '12:00', almocoFim: '13:00' }  
-        };
-        const agendamentosSimulados = { 
-            'joao-silva': { '2025-06-02': [ { inicio: '10:00', fim: '11:00' }, { inicio: '14:00', fim: '15:30' } ], '2025-06-03': [ { inicio: '11:00', fim: '12:00' } ] },
-            'ana-costa': { '2025-06-02': [ { inicio: '09:00', fim: '10:30' }, { inicio: '16:00', fim: '17:00' } ] }
-        };
+        let dadosAgendamento = { servicosSelecionados: [], barbeiro: { id: 'qualquer', nome: 'Qualquer Barbeiro Disponível' }, data: null, horario: null, cliente: { nome: '', email: '', telefone: '', observacoes: '' }, duracaoTotal: 0, precoTotal: 0.00 };
+        const horariosFuncionamento = { 0: null, 1: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 2: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 3: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 4: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 5: { inicio: '09:00', fim: '20:00', almocoInicio: '12:00', almocoFim: '13:00' }, 6: { inicio: '09:00', fim: '18:00', almocoInicio: '12:00', almocoFim: '13:00' } };
+        const agendamentosSimulados = { 'joao-silva': { '2025-06-02': [ { inicio: '10:00', fim: '11:00' }, { inicio: '14:00', fim: '15:30' } ], '2025-06-03': [ { inicio: '11:00', fim: '12:00' } ] }, 'ana-costa': { '2025-06-02': [ { inicio: '09:00', fim: '10:30' }, { inicio: '16:00', fim: '17:00' } ] } };
         const INTERVALO_SLOT_MINUTOS = 30;
 
         function timeStringToMinutes(timeStr) { if (!timeStr) return 0; const [hours, minutes] = timeStr.split(':').map(Number); return hours * 60 + minutes; }
@@ -245,9 +185,9 @@ document.addEventListener('DOMContentLoaded', function() {
             inputDataAgendamento.addEventListener('change', function() {
                 const dataSelecionadaString = this.value; const [ano, mes, dia] = dataSelecionadaString.split('-').map(Number); const dataSelecionada = new Date(ano, mes - 1, dia);
                 hoje.setHours(0,0,0,0);
-                if (dataSelecionada < hoje) { divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Não é possível selecionar uma data passada.'; divStatusAgendamento.style.display = 'block'; this.value = ''; dadosAgendamento.data = null; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 3000); limparSlotsDeHorario();}
-                else if (dataSelecionada.getDay() === 0) { divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Desculpe, não funcionamos aos Domingos.'; divStatusAgendamento.style.display = 'block'; this.value = ''; dadosAgendamento.data = null; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 3000); limparSlotsDeHorario();}
-                else { dadosAgendamento.data = dataSelecionadaString; divStatusAgendamento.style.display = 'none'; if (passoAtual === 4) { carregarHorariosDisponiveis(); } else { limparSlotsDeHorario(); } }
+                if (dataSelecionada < hoje) { if(divStatusAgendamento){divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Não é possível selecionar uma data passada.'; divStatusAgendamento.style.display = 'block'; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 3000);} this.value = ''; dadosAgendamento.data = null;  limparSlotsDeHorario();}
+                else if (dataSelecionada.getDay() === 0) { if(divStatusAgendamento){divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Desculpe, não funcionamos aos Domingos.'; divStatusAgendamento.style.display = 'block'; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 3000);} this.value = ''; dadosAgendamento.data = null; limparSlotsDeHorario();}
+                else { dadosAgendamento.data = dataSelecionadaString; if(divStatusAgendamento) divStatusAgendamento.style.display = 'none'; if (passoAtual === 4) { carregarHorariosDisponiveis(); } else { limparSlotsDeHorario(); } }
             });
         }
 
@@ -280,22 +220,22 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nomeCliente === '') { errosPasso5.push('O campo Nome Completo é obrigatório.'); }
             if (emailCliente === '') { errosPasso5.push('O campo Email é obrigatório.'); } else if (!isValidEmail(emailCliente)) { errosPasso5.push('Por favor, insira um endereço de email válido.'); }
             if (telefoneCliente === '') { errosPasso5.push('O campo Telefone é obrigatório.'); }
-            if (errosPasso5.length > 0) { divStatusAgendamento.className = 'form-status-mensagem error'; let ulErros = '<ul>'; errosPasso5.forEach(function(erro) { ulErros += '<li>' + erro + '</li>'; }); ulErros += '</ul>'; divStatusAgendamento.innerHTML = ulErros; divStatusAgendamento.style.display = 'block'; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 4000); return false; 
-            } else { dadosAgendamento.cliente.nome = nomeCliente; dadosAgendamento.cliente.email = emailCliente; dadosAgendamento.cliente.telefone = telefoneCliente; dadosAgendamento.cliente.observacoes = observacoesCliente; divStatusAgendamento.style.display = 'none'; return true; }
+            if (errosPasso5.length > 0) { if(divStatusAgendamento){divStatusAgendamento.className = 'form-status-mensagem error'; let ulErros = '<ul>'; errosPasso5.forEach(function(erro) { ulErros += '<li>' + erro + '</li>'; }); ulErros += '</ul>'; divStatusAgendamento.innerHTML = ulErros; divStatusAgendamento.style.display = 'block'; setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 4000);} return false; 
+            } else { dadosAgendamento.cliente.nome = nomeCliente; dadosAgendamento.cliente.email = emailCliente; dadosAgendamento.cliente.telefone = telefoneCliente; dadosAgendamento.cliente.observacoes = observacoesCliente; if(divStatusAgendamento) divStatusAgendamento.style.display = 'none'; return true; }
         }
         
         function formatarDataParaExibicao(dataStringYYYYMMDD) { if (!dataStringYYYYMMDD) return 'Não selecionada'; const [ano, mes, dia] = dataStringYYYYMMDD.split('-'); return `${dia}/${mes}/${ano}`; }
         function popularResumoAgendamento() {
-            document.getElementById('conf-servicos').textContent = dadosAgendamento.servicosSelecionados.map(s => s.nome).join(', ') || 'Nenhum';
-            document.getElementById('conf-duracao').textContent = formatarDuracao(dadosAgendamento.duracaoTotal);
-            document.getElementById('conf-preco').textContent = dadosAgendamento.precoTotal.toFixed(2).replace('.', ',');
-            document.getElementById('conf-barbeiro').textContent = dadosAgendamento.barbeiro ? dadosAgendamento.barbeiro.nome : 'Não selecionado';
-            document.getElementById('conf-data').textContent = formatarDataParaExibicao(dadosAgendamento.data);
-            document.getElementById('conf-horario').textContent = dadosAgendamento.horario || 'Não selecionado';
-            document.getElementById('conf-nome').textContent = dadosAgendamento.cliente.nome || 'Não informado';
-            document.getElementById('conf-email').textContent = dadosAgendamento.cliente.email || 'Não informado';
-            document.getElementById('conf-telefone').textContent = dadosAgendamento.cliente.telefone || 'Não informado';
-            document.getElementById('conf-observacoes').textContent = dadosAgendamento.cliente.observacoes || 'Nenhuma';
+            const elConfServicos = document.getElementById('conf-servicos'); if(elConfServicos) elConfServicos.textContent = dadosAgendamento.servicosSelecionados.map(s => s.nome).join(', ') || 'Nenhum';
+            const elConfDuracao = document.getElementById('conf-duracao'); if(elConfDuracao) elConfDuracao.textContent = formatarDuracao(dadosAgendamento.duracaoTotal);
+            const elConfPreco = document.getElementById('conf-preco'); if(elConfPreco) elConfPreco.textContent = dadosAgendamento.precoTotal.toFixed(2).replace('.', ',');
+            const elConfBarbeiro = document.getElementById('conf-barbeiro'); if(elConfBarbeiro) elConfBarbeiro.textContent = dadosAgendamento.barbeiro ? dadosAgendamento.barbeiro.nome : 'Não selecionado';
+            const elConfData = document.getElementById('conf-data'); if(elConfData) elConfData.textContent = formatarDataParaExibicao(dadosAgendamento.data);
+            const elConfHorario = document.getElementById('conf-horario'); if(elConfHorario) elConfHorario.textContent = dadosAgendamento.horario || 'Não selecionado';
+            const elConfNome = document.getElementById('conf-nome'); if(elConfNome) elConfNome.textContent = dadosAgendamento.cliente.nome || 'Não informado';
+            const elConfEmail = document.getElementById('conf-email'); if(elConfEmail) elConfEmail.textContent = dadosAgendamento.cliente.email || 'Não informado';
+            const elConfTelefone = document.getElementById('conf-telefone'); if(elConfTelefone) elConfTelefone.textContent = dadosAgendamento.cliente.telefone || 'Não informado';
+            const elConfObs = document.getElementById('conf-observacoes'); if(elConfObs) elConfObs.textContent = dadosAgendamento.cliente.observacoes || 'Nenhuma';
         }
 
         function mostrarPasso(numeroDoPasso) {
@@ -310,13 +250,11 @@ document.addEventListener('DOMContentLoaded', function() {
             btnProximo.addEventListener('click', function() {
                 let validoParaAvancar = true;
                 if(divStatusAgendamento) divStatusAgendamento.style.display = 'none';
-
                 if (passoAtual === 1) { if (dadosAgendamento.servicosSelecionados.length === 0) { if(divStatusAgendamento) {divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Por favor, selecione pelo menos um serviço.';} validoParaAvancar = false; } }
                 else if (passoAtual === 3) { if (!dadosAgendamento.data) { if(divStatusAgendamento) {divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Por favor, selecione uma data válida.';} validoParaAvancar = false; } }
                 else if (passoAtual === 4) { if (!dadosAgendamento.horario) { if(divStatusAgendamento) {divStatusAgendamento.className = 'form-status-mensagem error'; divStatusAgendamento.textContent = 'Por favor, selecione um horário.';} validoParaAvancar = false; } }
                 else if (passoAtual === 5) { validoParaAvancar = validarEGuardarDadosCliente(); }
-
-                if (!validoParaAvancar) { if(divStatusAgendamento) {divStatusAgendamento.style.display = 'block'; if (passoAtual !== 5) { setTimeout(() => { divStatusAgendamento.style.display = 'none'; }, 3000);}} return; }
+                if (!validoParaAvancar) { if(divStatusAgendamento) {divStatusAgendamento.style.display = 'block'; if (passoAtual !== 5) { setTimeout(() => { if(divStatusAgendamento) divStatusAgendamento.style.display = 'none'; }, 3000);}} return; }
                 if (passoAtual < totalPassos) { passoAtual++; mostrarPasso(passoAtual); if(passoAtual === 4) { carregarHorariosDisponiveis(); } else if (passoAtual === 6) { popularResumoAgendamento(); } }
             });
         }
@@ -335,18 +273,13 @@ document.addEventListener('DOMContentLoaded', function() {
             try { let agendamentosSalvos = JSON.parse(localStorage.getItem('meusAgendamentos')) || []; agendamentosSalvos.push(dadosAgendamento); localStorage.setItem('meusAgendamentos', JSON.stringify(agendamentosSalvos)); console.log('Agendamento salvo no localStorage.'); } catch (e) { console.error('Erro ao salvar no localStorage:', e); }
             if(divStatusAgendamento) { divStatusAgendamento.className = 'form-status-mensagem success'; divStatusAgendamento.textContent = 'Seu agendamento foi realizado com sucesso! (Simulação)'; divStatusAgendamento.style.display = 'block';}
             passosFieldsets.forEach(fieldset => { fieldset.style.display = 'none'; });
-            const agendamentoNavEl = document.querySelector('.agendamento-navegacao');
-            if(agendamentoNavEl) agendamentoNavEl.style.display = 'none';
-            const progressoAgendamentoEl = document.querySelector('.progresso-agendamento');
-            if(progressoAgendamentoEl) progressoAgendamentoEl.style.display = 'none';
-            const formLegend = formAgendamento.querySelector('legend'); //Pode não existir se o fieldset atual não for o primeiro
-            if(formLegend && formLegend.parentElement.style.display !== 'none') formLegend.parentElement.style.display = 'none';
-
-
+            const agendamentoNavEl = document.querySelector('.agendamento-navegacao'); if(agendamentoNavEl) agendamentoNavEl.style.display = 'none';
+            const progressoAgendamentoEl = document.querySelector('.progresso-agendamento'); if(progressoAgendamentoEl) progressoAgendamentoEl.style.display = 'none';
+            
             setTimeout(() => {
                 formAgendamento.reset(); 
                 dadosAgendamento = { servicosSelecionados: [], barbeiro: { id: 'qualquer', nome: 'Qualquer Barbeiro Disponível' }, data: null, horario: null, cliente: { nome: '', email: '', telefone: '', observacoes: '' }, duracaoTotal: 0, precoTotal: 0.00 };
-                const secaoPasso1AgendamentoReset = document.getElementById('passo1-servico'); if(secaoPasso1AgendamentoReset) atualizarResumoServicos(); // Precisa garantir que a função tem acesso aos elementos corretos
+                const secaoPasso1AgendamentoReset = document.getElementById('passo1-servico'); if(secaoPasso1AgendamentoReset) { const checkboxes = secaoPasso1AgendamentoReset.querySelectorAll('input[type="checkbox"]'); checkboxes.forEach(cb => cb.checked = false); atualizarResumoServicos(); }
                 limparSlotsDeHorario();    
                 const selectBarbeiroReset = document.getElementById('selecao-barbeiro'); if(selectBarbeiroReset) selectBarbeiroReset.value = 'qualquer'; 
                 const inputDataReset = document.getElementById('selecao-data'); if(inputDataReset) inputDataReset.value = ''; 
@@ -357,16 +290,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 7000); 
         });
 
-        // Função isValidEmail (necessária para validação de contato e agendamento)
-        function isValidEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
-
-        // Inicializa mostrando o primeiro passo
+        function isValidEmail(email) { const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; return regex.test(email); }
         mostrarPasso(passoAtual);
-
-    } // Fim do if (formAgendamento)
-    // --- FIM DA LÓGICA DO FORMULÁRIO DE AGENDAMENTO ---
+    }
+    
+    // --- ANIMAÇÕES DE ENTRADA AO ROLAR A PÁGINA ---
+    const elementosParaAnimar = document.querySelectorAll('.elemento-animado, .fade-in');
+    if (elementosParaAnimar.length > 0) {
+        const observerOpcoes = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const animarAoVer = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visivel');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        };
+        const intersectionObserver = new IntersectionObserver(animarAoVer, observerOpcoes);
+        elementosParaAnimar.forEach(el => { intersectionObserver.observe(el); });
+    }
 
 }); // Fim do document.addEventListener('DOMContentLoaded')

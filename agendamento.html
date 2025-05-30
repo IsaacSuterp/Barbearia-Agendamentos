@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Online - Barbearia Seu Estilo</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Barbearia Seu Estilo</a></h1>
+            <nav>
+                <button id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+                <ul id="menu-principal">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="agendamento.html">Agendamento</a></li> <li><a href="equipe.html">Equipe</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="pagina-agendamento" class="pagina-conteudo">
+            <div class="container">
+                <h2 class="titulo-pagina">Faça seu Agendamento</h2>
+                <p class="subtitulo-pagina">Escolha o serviço, profissional, data e horário de sua preferência em poucos passos.</p>
+
+                <div id="form-agendamento-container">
+                    <form id="form-agendamento">
+                        <div class="progresso-agendamento">
+                            <div class="passo-indicador ativo" data-passo="1">1. Serviços</div>
+                            <div class="passo-indicador" data-passo="2">2. Barbeiro</div>
+                            <div class="passo-indicador" data-passo="3">3. Data</div>
+                            <div class="passo-indicador" data-passo="4">4. Horário</div>
+                            <div class="passo-indicador" data-passo="5">5. Seus Dados</div>
+                            <div class="passo-indicador" data-passo="6">6. Confirmação</div>
+                        </div>
+
+                        <fieldset class="agendamento-passo" id="passo1-servico" data-step="1">
+                            <legend>Passo 1: Escolha o(s) Serviço(s)</legend>
+                            <div id="lista-servicos-agendamento" class="checkbox-list">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="servico-corte-moderno" name="servicos_selecionados" value="corte-moderno" data-duracao="60" data-preco="70.00">
+                                    <label for="servico-corte-moderno">Corte Moderno (60 min) - R$ 70,00</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="servico-barba-premium" name="servicos_selecionados" value="barba-premium" data-duracao="45" data-preco="60.00">
+                                    <label for="servico-barba-premium">Barba Premium (45 min) - R$ 60,00</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="servico-combo-vip" name="servicos_selecionados" value="pacote-vip" data-duracao="105" data-preco="120.00">
+                                    <label for="servico-combo-vip">Pacote VIP (Corte + Barba) (1h 45min) - R$ 120,00</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="servico-hidratacao" name="servicos_selecionados" value="hidratacao" data-duracao="30" data-preco="50.00">
+                                    <label for="servico-hidratacao">Hidratação Capilar (30 min) - R$ 50,00</label>
+                                </div>
+                                </div>
+                            <p>Duração Total Estimada: <span id="duracao-total-estimada">0 min</span></p>
+                            <p>Preço Total Estimado: R$ <span id="preco-total-estimado">0.00</span></p>
+                        </fieldset>
+
+                        <fieldset class="agendamento-passo" id="passo2-barbeiro" data-step="2" style="display:none;">
+                            <legend>Passo 2: Escolha o Barbeiro (Opcional)</legend>
+                            <div class="form-grupo">
+                                <label for="selecao-barbeiro">Barbeiro de Preferência:</label>
+                                <select id="selecao-barbeiro" name="barbeiro">
+                                    <option value="qualquer" selected>Qualquer Barbeiro Disponível</option>
+                                    <option value="joao-silva">João "Mãos de Tesoura" Silva</option>
+                                    <option value="ana-costa">Ana "A Estilista" Costa</option>
+                                    <option value="ricardo-lima">Ricardo "O Detalhista" Lima</option>
+                                    </select>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="agendamento-passo" id="passo3-data" data-step="3" style="display:none;">
+                            <legend>Passo 3: Escolha a Data</legend>
+                            <div class="form-grupo">
+                                <label for="selecao-data">Data do Agendamento:</label>
+                                <input type="date" id="selecao-data" name="data" class="form-input-date">
+                                </div>
+                        </fieldset>
+
+                        <fieldset class="agendamento-passo" id="passo4-horario" data-step="4" style="display:none;">
+                            <legend>Passo 4: Escolha o Horário</legend>
+                            <div id="slots-horario-disponiveis" class="time-slots-container">
+                                <p class="placeholder-horarios">Por favor, selecione um serviço, barbeiro (opcional) e uma data para ver os horários disponíveis.</p>
+                                </div>
+                        </fieldset>
+
+                        <fieldset class="agendamento-passo" id="passo5-info" data-step="5" style="display:none;">
+                            <legend>Passo 5: Suas Informações</legend>
+                            <div class="form-grupo">
+                                <label for="nome-agendamento">Nome Completo:</label>
+                                <input type="text" id="nome-agendamento" name="nome-agendamento">
+                            </div>
+                            <div class="form-grupo">
+                                <label for="email-agendamento">Email:</label>
+                                <input type="email" id="email-agendamento" name="email-agendamento">
+                            </div>
+                            <div class="form-grupo">
+                                <label for="telefone-agendamento">Telefone (com DDD):</label>
+                                <input type="tel" id="telefone-agendamento" name="telefone-agendamento" placeholder="(XX) XXXXX-XXXX">
+                            </div>
+                            <div class="form-grupo">
+                                <label for="observacoes-agendamento">Observações (opcional):</label>
+                                <textarea id="observacoes-agendamento" name="observacoes-agendamento" rows="3" placeholder="Alguma preferência ou informação adicional?"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="agendamento-passo" id="passo6-confirmacao" data-step="6" style="display:none;">
+                            <legend>Passo 6: Confirme seu Agendamento</legend>
+                            <div id="resumo-agendamento">
+                                <h4>Resumo do Agendamento:</h4>
+                                <p><strong>Serviço(s):</strong> <span id="conf-servicos"></span></p>
+                                <p><strong>Duração Total:</strong> <span id="conf-duracao"></span></p>
+                                <p><strong>Preço Total:</strong> R$ <span id="conf-preco"></span></p>
+                                <p><strong>Barbeiro:</strong> <span id="conf-barbeiro"></span></p>
+                                <p><strong>Data:</strong> <span id="conf-data"></span></p>
+                                <p><strong>Horário:</strong> <span id="conf-horario"></span></p>
+                                <hr>
+                                <h4>Seus Dados:</h4>
+                                <p><strong>Nome:</strong> <span id="conf-nome"></span></p>
+                                <p><strong>Email:</strong> <span id="conf-email"></span></p>
+                                <p><strong>Telefone:</strong> <span id="conf-telefone"></span></p>
+                                <p><strong>Observações:</strong> <span id="conf-observacoes"></span></p>
+                            </div>
+                            <p style="margin-top: 20px; font-size: 0.9em; text-align: center;">Ao clicar em "Confirmar Agendamento", você concorda com nossos termos de serviço e política de cancelamento.</p>
+                        </fieldset>
+
+                        <div class="agendamento-navegacao">
+                            <button type="button" id="btn-anterior" class="cta-button-secundario" style="display:none;">Anterior</button>
+                            <button type="button" id="btn-proximo" class="cta-button">Próximo</button>
+                            <button type="submit" id="btn-confirmar-agendamento" class="cta-button" style="display:none;">Confirmar Agendamento</button>
+                        </div>
+                    </form>
+                    <div id="agendamento-status" class="form-status-mensagem" style="margin-top: 20px;"></div>
+                </div> </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-colunas">
+                <div class="footer-coluna">
+                    <h4>Barbearia Seu Estilo</h4>
+                    <p>Rua das Tesouras, 123<br>Bairro Navalha, Cidade Estilo - ES<br>CEP: 00000-000</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Contato</h4>
+                    <p>Telefone: (27) 99999-8888</p>
+                    <p>Email: contato@seuestilo.com.br</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Horário de Funcionamento</h4>
+                    <p>Seg - Sex: 09:00 - 20:00</p>
+                    <p>Sáb: 09:00 - 18:00</p>
+                    <p>Dom: Fechado</p>
+                </div>
+                <div class="footer-coluna">
+                    <h4>Redes Sociais</h4>
+                    <ul class="redes-sociais">
+                        <li><a href="#" target="_blank" aria-label="Facebook">FB</a></li>
+                        <li><a href="#" target="_blank" aria-label="Instagram">IG</a></li>
+                        <li><a href="#" target="_blank" aria-label="WhatsApp">WA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-direitos">
+                <p>© <span id="ano-atual">2024</span> Barbearia Seu Estilo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+                                  </html>

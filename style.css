@@ -86,7 +86,8 @@ section {
 #depoimentos,
 #pagina-servicos, 
 #pagina-equipe,
-#pagina-contato { /* Adicionado #pagina-contato */
+#pagina-contato,
+#pagina-agendamento { /* Adicionado #pagina-agendamento */
     background-color: var(--cor-secundaria);
 }
 #hero, 
@@ -281,6 +282,41 @@ header nav ul li a.active::after {
 .form-status-mensagem.success { background-color: #28a745; color: white; display: block; }
 .form-status-mensagem.error { background-color: #dc3545; color: white; display: block; }
 
+/* === Estilos da Página de Agendamento === */
+#form-agendamento-container { background-color: var(--cor-primaria); padding: 20px; border-radius: 8px; }
+.progresso-agendamento { display: flex; justify-content: space-around; flex-wrap: wrap; list-style: none; padding: 0; margin-bottom: 30px; border-bottom: 1px solid var(--cor-terciaria); }
+.passo-indicador { padding: 10px 5px; color: var(--cor-texto-secundario); font-size: 0.85em; text-align: center; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; flex-grow: 1; min-width: 100px; margin-bottom: 10px; }
+.passo-indicador.ativo { color: var(--cor-destaque); font-weight: bold; border-bottom-color: var(--cor-destaque); }
+fieldset.agendamento-passo { border: 1px solid var(--cor-terciaria); padding: 20px 25px 25px 25px; margin-bottom: 30px; border-radius: 8px; background-color: var(--cor-secundaria); }
+fieldset.agendamento-passo legend { font-family: var(--fonte-titulos); color: var(--cor-destaque); font-size: 1.6rem; font-weight: bold; padding: 0 10px; margin-left: 10px; }
+#lista-servicos-agendamento.checkbox-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.checkbox-item { display: flex; align-items: center; background-color: var(--cor-primaria); padding: 12px 15px; border-radius: 5px; border: 1px solid var(--cor-terciaria); transition: border-color 0.3s ease; }
+.checkbox-item:hover { border-color: var(--cor-destaque); }
+.checkbox-item input[type="checkbox"] { margin-right: 12px; transform: scale(1.2); accent-color: var(--cor-destaque); }
+.checkbox-item label { font-weight: normal; color: var(--cor-texto-principal); cursor: pointer; font-size: 0.95rem; }
+#passo1-servico p { font-weight: bold; color: var(--cor-texto-principal); margin-top: 10px; font-size: 1.1rem; }
+#passo1-servico p span { color: var(--cor-destaque); }
+#selecao-barbeiro { width: 100%; padding: 12px 15px; border: 1px solid var(--cor-terciaria); background-color: var(--cor-primaria); color: var(--cor-texto-principal); border-radius: 5px; font-family: var(--fonte-principal); font-size: 1rem; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23c89b3c' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
+#selecao-barbeiro:focus { border-color: var(--cor-destaque); outline: none; box-shadow: 0 0 8px rgba(var(--cor-destaque), 0.5); }
+.form-input-date { width: 100%; padding: 12px 15px; border: 1px solid var(--cor-terciaria); background-color: var(--cor-primaria); color: var(--cor-texto-principal); border-radius: 5px; font-family: var(--fonte-principal); font-size: 1rem; color-scheme: dark; }
+.form-input-date:focus { border-color: var(--cor-destaque); outline: none; box-shadow: 0 0 8px rgba(var(--cor-destaque), 0.5); }
+.form-input-date::-webkit-calendar-picker-indicator { filter: invert(0.8) sepia(1) saturate(5) hue-rotate(350deg) brightness(1); cursor: pointer; }
+.time-slots-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 12px; margin-top: 15px; }
+.placeholder-horarios { grid-column: 1 / -1; text-align: center; padding: 20px; background-color: var(--cor-primaria); border-radius: 5px; color: var(--cor-texto-secundario); }
+.time-slot { background-color: var(--cor-primaria); border: 1px solid var(--cor-destaque); color: var(--cor-destaque); padding: 12px 10px; text-align: center; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; }
+.time-slot:hover { background-color: var(--cor-destaque); color: #000000; transform: scale(1.05); }
+.time-slot.selected { background-color: var(--cor-destaque); color: #000000; border-color: var(--cor-destaque-hover); box-shadow: 0 0 8px rgba(var(--cor-destaque), 0.7); }
+.time-slot.disabled { background-color: var(--cor-terciaria) !important; color: var(--cor-texto-secundario) !important; border-color: var(--cor-terciaria) !important; cursor: not-allowed; transform: none !important; }
+#resumo-agendamento { background-color: var(--cor-primaria); padding: 20px; border-radius: 8px; border: 1px solid var(--cor-terciaria); }
+#resumo-agendamento h4 { font-size: 1.3rem; color: var(--cor-destaque); margin-bottom: 15px; border-bottom: 1px solid var(--cor-terciaria); padding-bottom: 10px; }
+#resumo-agendamento p { margin-bottom: 10px; font-size: 1rem; color: var(--cor-texto-principal); }
+#resumo-agendamento p strong { color: var(--cor-texto-secundario); min-width: 120px; display: inline-block; }
+#resumo-agendamento hr { border: none; border-top: 1px solid var(--cor-terciaria); margin: 15px 0; }
+#resumo-agendamento span[id^="conf-"] { color: var(--cor-destaque); font-weight: bold; }
+.agendamento-navegacao { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--cor-terciaria); }
+.agendamento-navegacao button { padding: 10px 25px; }
+
+
 /* === Rodapé (Footer) === */
 footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundario); padding: 50px 0 20px 0; border-top: 3px solid var(--cor-destaque); }
 .footer-colunas { display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; margin-bottom: 30px; }
@@ -320,6 +356,9 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
 
     /* Página de Contato */
     .contato-info h3, .contato-formulario h3 { font-size: 1.7rem; }
+
+    /* Página de Agendamento - sem grandes mudanças aqui, mais em 768px */
+    fieldset.agendamento-passo legend { font-size: 1.5rem; }
 }
 
 /* Para Tablets e Celulares Maiores (Regras para 768px) */
@@ -387,6 +426,19 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     .contato-info a { display: block; }
     .mapa-container iframe { height: 250px; }
     #form-contato button[type="submit"] { align-self: center; width: 80%; max-width: 300px; }
+
+    /* Página de Agendamento */
+    .progresso-agendamento { font-size: 0.8em; }
+    .passo-indicador { min-width: 80px; padding: 8px 3px; }
+    fieldset.agendamento-passo legend { font-size: 1.4rem; }
+    #lista-servicos-agendamento.checkbox-list { grid-template-columns: 1fr; }
+    .time-slots-container { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+    .time-slot { padding: 10px 8px; }
+    #resumo-agendamento p strong { display: block; margin-bottom: 3px; min-width: auto; }
+    .agendamento-navegacao { flex-direction: column; gap: 15px; }
+    .agendamento-navegacao button { width: 100%; text-align: center; }
+    #btn-anterior { order: 1; }
+    #btn-proximo, #btn-confirmar-agendamento { order: 2; }
 }
 
 /* Para Celulares Menores (ex: até 480px) */
@@ -420,7 +472,7 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     .depoimento h4 { font-size: 0.9rem; }
     .footer-coluna p, .footer-coluna ul li { font-size: 0.9rem; }
 
-    /* Página de Serviços e Página da Equipe e Contato */
+    /* Páginas Internas (Serviços, Equipe, Contato, Agendamento) */
     .titulo-pagina { font-size: 1.9rem; }
     .subtitulo-pagina { font-size: 0.95rem; margin-bottom: 25px; }
 
@@ -446,6 +498,19 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     .contato-info h4 { font-size: 1.2rem; }
     .form-grupo input[type="text"], .form-grupo input[type="email"], .form-grupo input[type="tel"], .form-grupo textarea { padding: 10px 12px; font-size: 0.95rem; }
     #form-contato button[type="submit"] { width: 100%; max-width: none; padding: 12px 20px; }
+    
+    /* Agendamento */
+    .progresso-agendamento { justify-content: center; }
+    .passo-indicador { font-size: 0.75em; flex-basis: 30%; }
+    fieldset.agendamento-passo { padding: 15px; }
+    fieldset.agendamento-passo legend { font-size: 1.3rem; }
+    .checkbox-item label { font-size: 0.9rem; }
+    #passo1-servico p { font-size: 1rem; }
+    #selecao-barbeiro, .form-input-date { padding: 10px 12px; font-size: 0.95rem; }
+    .time-slots-container { grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); }
+    .time-slot { font-size: 0.9rem; }
+    #resumo-agendamento h4 { font-size: 1.2rem; }
+    #resumo-agendamento p { font-size: 0.95rem; }
 }
 
 /* Ajustes finos para telas muito pequenas (ex: 360px) */
@@ -468,4 +533,13 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     .membro-equipe-imagem { height: 220px; } /* Página da Equipe */
     .membro-equipe-info h3 { font-size: 1.4rem; } /* Página da Equipe */
     .mapa-container iframe { height: 200px; } /* Página de Contato */
+
+    /* Agendamento */
+    .passo-indicador { flex-basis: 45%; font-size: 0.7em; } /* Tentar 2 por linha */
+    fieldset.agendamento-passo legend { font-size: 1.2rem; }
+    #lista-servicos-agendamento.checkbox-list { gap: 10px; }
+    .checkbox-item { padding: 10px; }
+    .checkbox-item input[type="checkbox"] { margin-right: 8px; }
+    .time-slots-container { grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 6px; }
+    .time-slot { padding: 8px; font-size: 0.85rem; }
 }

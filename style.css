@@ -2,198 +2,57 @@
 
 /* === Variáveis CSS === */
 :root {
-    --cor-primaria: #121212; /* Fundo bem escuro */
-    --cor-secundaria: #1e1e1e; /* Fundo para seções/cards */
-    --cor-terciaria: #2a2a2a; /* Bordas ou detalhes sutis */
-    --cor-texto-principal: #e0e0e0; /* Texto claro principal */
-    --cor-texto-secundario: #a0a0a0; /* Texto claro secundário */
-    --cor-destaque: #c89b3c; /* Dourado/Bronze para CTAs e links */
-    --cor-destaque-hover: #dfad52; /* Dourado/Bronze mais claro para hover */
+    --cor-primaria: #121212;
+    --cor-secundaria: #1e1e1e;
+    --cor-terciaria: #2a2a2a;
+    --cor-texto-principal: #e0e0e0;
+    --cor-texto-secundario: #a0a0a0;
+    --cor-destaque: #c89b3c;
+    --cor-destaque-hover: #dfad52;
     --fonte-principal: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --fonte-titulos: 'Georgia', 'Times New Roman', Times, serif;
 }
 
 /* === Reset Básico e Estilos Globais === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--fonte-principal);
-    line-height: 1.6;
-    background-color: var(--cor-primaria);
-    color: var(--cor-texto-principal);
-    font-size: 16px;
-}
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-h1, h2, h3, h4 {
-    font-family: var(--fonte-titulos);
-    color: var(--cor-destaque);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-principal); line-height: 1.6; background-color: var(--cor-primaria); color: var(--cor-texto-principal); font-size: 16px; }
+.container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
+h1, h2, h3, h4 { font-family: var(--fonte-titulos); color: var(--cor-destaque); margin-bottom: 1rem; line-height: 1.3; }
 h1 { font-size: 2.8rem; }
 h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2rem; }
 h3 { font-size: 1.8rem; }
 h4 { font-size: 1.3rem; color: var(--cor-texto-principal); }
-
-p {
-    margin-bottom: 1rem;
-    color: var(--cor-texto-secundario);
-}
-
-a {
-    color: var(--cor-destaque);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--cor-destaque-hover);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-ul {
-    list-style: none;
-}
-
-section {
-    padding: 60px 0;
-}
+p { margin-bottom: 1rem; color: var(--cor-texto-secundario); }
+a { color: var(--cor-destaque); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--cor-destaque-hover); }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+section { padding: 60px 0; }
 
 /* Cor de fundo para seções específicas */
-#sobre-nos, 
-#nossa-equipe, /* Seção da homepage */
-#depoimentos,
-#pagina-servicos, 
-#pagina-equipe,
-#pagina-contato,
-#pagina-agendamento { /* Adicionado #pagina-agendamento */
-    background-color: var(--cor-secundaria);
-}
-#hero, 
-#nossos-servicos, /* Seção da homepage */
-#galeria-home {
-    background-color: var(--cor-primaria);
-}
-
+#sobre-nos, #nossa-equipe, #depoimentos, #pagina-servicos, #pagina-equipe, #pagina-contato, #pagina-agendamento { background-color: var(--cor-secundaria); }
+#hero, #nossos-servicos, #galeria-home { background-color: var(--cor-primaria); }
 
 /* === Cabeçalho (Header) === */
-header {
-    background-color: var(--cor-secundaria);
-    padding: 1rem 0;
-    border-bottom: 2px solid var(--cor-terciaria);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-header h1 a {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--cor-destaque);
-}
-header nav ul {
-    display: flex;
-}
-header nav ul li {
-    margin-left: 20px;
-}
-header nav ul li a {
-    color: var(--cor-texto-principal);
-    font-weight: bold;
-    padding: 0.5rem 0;
-    position: relative;
-}
-header nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--cor-destaque);
-    transition: width 0.3s ease;
-}
-header nav ul li a:hover::after,
-header nav ul li a.active::after {
-    width: 100%;
-}
-#menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--cor-destaque);
-    font-size: 2rem;
-    cursor: pointer;
-}
+header { background-color: var(--cor-secundaria); padding: 1rem 0; border-bottom: 2px solid var(--cor-terciaria); position: sticky; top: 0; z-index: 1000; }
+header .container { display: flex; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0; }
+header h1 a { font-size: 1.8rem; font-weight: bold; color: var(--cor-destaque); }
+header nav ul { display: flex; }
+header nav ul li { margin-left: 20px; }
+header nav ul li a { color: var(--cor-texto-principal); font-weight: bold; padding: 0.5rem 0; position: relative; }
+header nav ul li a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background-color: var(--cor-destaque); transition: width 0.3s ease; }
+header nav ul li a:hover::after, header nav ul li a.active::after { width: 100%; }
+#menu-toggle { display: none; background: none; border: none; color: var(--cor-destaque); font-size: 2rem; cursor: pointer; }
 
 /* === Botões CTA (Call to Action) === */
-.cta-button, .cta-button-secundario {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: var(--cor-destaque);
-    color: #000000 !important;
-    font-family: var(--fonte-principal);
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
-    text-align: center;
-    border: 2px solid var(--cor-destaque);
-    cursor: pointer;
-}
-.cta-button:hover, .cta-button-secundario:hover {
-    background-color: var(--cor-destaque-hover);
-    border-color: var(--cor-destaque-hover);
-    color: #000000 !important;
-    transform: translateY(-2px);
-}
-.cta-button-secundario {
-    background-color: transparent;
-    color: var(--cor-destaque) !important;
-}
-.cta-button-secundario:hover {
-    background-color: var(--cor-destaque);
-    color: #000000 !important;
-}
+.cta-button, .cta-button-secundario { display: inline-block; padding: 12px 25px; background-color: var(--cor-destaque); color: #000000 !important; font-family: var(--fonte-principal); font-weight: bold; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; text-align: center; border: 2px solid var(--cor-destaque); cursor: pointer; }
+.cta-button:hover, .cta-button-secundario:hover { background-color: var(--cor-destaque-hover); border-color: var(--cor-destaque-hover); color: #000000 !important; transform: translateY(-2px); }
+.cta-button-secundario { background-color: transparent; color: var(--cor-destaque) !important; }
+.cta-button-secundario:hover { background-color: var(--cor-destaque); color: #000000 !important; }
 
 /* === Seção Hero (Homepage) === */
-#hero {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('hero-background.jpg') no-repeat center center/cover;
-    color: #fff;
-    text-align: center;
-    padding: 100px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
-}
+#hero { background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('hero-background.jpg') no-repeat center center/cover; color: #fff; text-align: center; padding: 100px 0; display: flex; align-items: center; justify-content: center; min-height: 70vh; }
 #hero .container { max-width: 800px; }
 #hero h2 { font-size: 3rem; margin-bottom: 1rem; color: #fff; font-weight: bold; }
 #hero p { font-size: 1.2rem; margin-bottom: 2rem; color: var(--cor-texto-principal); }
@@ -316,6 +175,30 @@ fieldset.agendamento-passo legend { font-family: var(--fonte-titulos); color: va
 .agendamento-navegacao { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--cor-terciaria); }
 .agendamento-navegacao button { padding: 10px 25px; }
 
+/* === Estilos para Animações de Rolagem === */
+.elemento-animado {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-delay: 0.1s;
+}
+.elemento-animado.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    transition-delay: 0.1s;
+}
+.fade-in.visivel {
+    opacity: 1;
+}
+.delay-1 { transition-delay: 0.2s !important; }
+.delay-2 { transition-delay: 0.4s !important; }
+.delay-3 { transition-delay: 0.6s !important; }
+.delay-4 { transition-delay: 0.8s !important; }
 
 /* === Rodapé (Footer) === */
 footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundario); padding: 50px 0 20px 0; border-top: 3px solid var(--cor-destaque); }
@@ -357,7 +240,7 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     /* Página de Contato */
     .contato-info h3, .contato-formulario h3 { font-size: 1.7rem; }
 
-    /* Página de Agendamento - sem grandes mudanças aqui, mais em 768px */
+    /* Página de Agendamento */
     fieldset.agendamento-passo legend { font-size: 1.5rem; }
 }
 
@@ -535,7 +418,7 @@ footer { background-color: var(--cor-primaria); color: var(--cor-texto-secundari
     .mapa-container iframe { height: 200px; } /* Página de Contato */
 
     /* Agendamento */
-    .passo-indicador { flex-basis: 45%; font-size: 0.7em; } /* Tentar 2 por linha */
+    .passo-indicador { flex-basis: 45%; font-size: 0.7em; } 
     fieldset.agendamento-passo legend { font-size: 1.2rem; }
     #lista-servicos-agendamento.checkbox-list { gap: 10px; }
     .checkbox-item { padding: 10px; }
